@@ -43,6 +43,12 @@ uri="http://www.springframework.org/tags/form" %>
                   <hr />
 
                   <div class="card" style="width: 60%">
+                    <img
+                      class="card-img-top"
+                      src="/images/avatar/${user.avatar}"
+                      alt="Card image cap"
+                      style="max-height: 250px; object-fit: contain"
+                    />
                     <div class="card-header">User information</div>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">ID: ${user.id}</li>

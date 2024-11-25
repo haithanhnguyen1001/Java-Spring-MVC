@@ -15,6 +15,24 @@ uri="http://www.springframework.org/tags/form" %>
     <title>Update User - Hỏi Dân IT</title>
     <link href="/css/styles.css" rel="stylesheet" />
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(() => {
+        const avatarFile = $('#avatarFile')
+        const orgImage = '${newUser.avatar}'
+        if (orgImage) {
+          const urlImage = '/images/avatar/' + orgImage
+          $('#avatarPreview').attr('src', urlImage)
+          $('#avatarPreview').css({ display: 'block' })
+        }
+
+        avatarFile.change(function (e) {
+          const imgURL = URL.createObjectURL(e.target.files[0])
+          $('#avatarPreview').attr('src', imgURL)
+          $('#avatarPreview').css({ display: 'block' })
+        })
+      })
+    </script>
     <script
       src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
       crossorigin="anonymous"
@@ -35,12 +53,13 @@ uri="http://www.springframework.org/tags/form" %>
             </ol>
             <div class="mt-5">
               <div class="row">
-                <div class="col-md-6 col-12 mx-auto">
+                <div class="col-md-6 col-12 mx-auto mb-3">
                   <h3>Update a user</h3>
                   <hr />
                   <form:form
                     method="post"
                     action="/admin/user/update"
+                    enctype="multipart/form-data"
                     modelAttribute="newUser"
                   >
                     <div class="mb-3" style="display: none">
@@ -80,6 +99,24 @@ uri="http://www.springframework.org/tags/form" %>
                         type="text"
                         class="form-control"
                         path="address"
+                      />
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="avatarFile" class="form-label">Avatar:</label>
+                      <input
+                        class="form-control"
+                        type="file"
+                        id="avatarFile"
+                        accept=".png, .jpg, .jpeg"
+                        name="hoidanitFile"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <img
+                        style="max-height: 250px; display: none"
+                        alt="avatar preview"
+                        id="avatarPreview"
                       />
                     </div>
 
